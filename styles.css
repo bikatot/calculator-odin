@@ -1,0 +1,35 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 900px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 675px;
+  width: 450px;
+  border-radius: 20px;
+  align-self: center;
+  padding: 20px;
+  justify-content: space-between;
+  background-color: #756971;
+}
+
+.display-border {
+  padding: 15px;
+  border-radius: 10px;
+  border: solid 3px #7b7177;
+  background-color: #62535b;
+
+}
+
+.display {
+  display: flex;
+  border: 3px solid black;
+  justify-content: flex-end;
+  font-size: 70px;
+  background-color: #7b7678;
+  padding: 0px 20px;
+}
