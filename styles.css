@@ -3,6 +3,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 900px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -15,9 +16,11 @@ body {
   padding: 20px;
   justify-content: space-between;
   background-color: #756971;
+  gap: 20px;
 }
 
-.display-border {
+.display-border,
+.buttons-container {
   padding: 15px;
   border-radius: 10px;
   border: solid 3px #7b7177;
@@ -27,9 +30,45 @@ body {
 
 .display {
   display: flex;
-  border: 3px solid black;
+  border: 3px solid #392c2b;
   justify-content: flex-end;
   font-size: 70px;
   background-color: #7b7678;
   padding: 0px 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85px;
+  width: 85px;
+  font-size: 60px;
+  background-color: #5e4d53;
+  border-radius: 10px;
+  border: solid 3px #37292b;
+  box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.delete,
+.cancel {
+  width: 190px;
+  background-color: #de7320;
+  color: #cfd4d1;
+}
+
+.operator {
+  background-color: #cfd4d1;
+}
+
+.number {
+  color: #cfd4d1;
 }
