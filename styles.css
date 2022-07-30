@@ -32,9 +32,11 @@ body {
   display: flex;
   border: 3px solid #392c2b;
   justify-content: flex-end;
-  font-size: 70px;
+  font-size: 60px;
   background-color: #7b7678;
   padding: 0px 20px;
+  font-family: 'Audiowide', cursive;
+  color: #291f1f;
 }
 
 .buttons-container {
@@ -45,21 +47,23 @@ body {
   gap: 10px;
 }
 
-.button {
+button {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 85px;
-  width: 85px;
+  height: 91px;
+  width: 91px;
   font-size: 60px;
   background-color: #5e4d53;
   border-radius: 10px;
   border: solid 3px #37292b;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.2);
+  padding: 0px;
+  cursor: pointer;
 }
 
-.delete,
-.cancel {
+.backspace,
+.clear {
   width: 190px;
   background-color: #de7320;
   color: #cfd4d1;
@@ -72,3 +76,4 @@ body {
 .number {
   color: #cfd4d1;
 }
+
