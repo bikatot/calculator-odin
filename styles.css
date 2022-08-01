@@ -64,7 +64,7 @@ button {
 
 .backspace,
 .clear {
-  width: 190px;
+  width: 195px;
   background-color: #de7320;
   color: #cfd4d1;
 }
@@ -76,4 +76,3 @@ button {
 .number {
   color: #cfd4d1;
 }
-
