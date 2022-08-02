@@ -69,7 +69,8 @@ button {
   color: #cfd4d1;
 }
 
-.operator {
+.operator,
+.equals {
   background-color: #cfd4d1;
 }
 

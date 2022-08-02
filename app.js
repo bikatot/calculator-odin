@@ -33,8 +33,9 @@ function operate(operator, firstNumber, secondNumber) {
   };
 };
 
-let displayValue = document.querySelector(".display");
 let numbers = document.querySelectorAll(".number");
+let operators = document.querySelectorAll(".operator")
+let displayValue = document.querySelector(".display");
 let clearButton = document.querySelector(".clear");
 let plusButton = document.querySelector(".plus");
 let minusButton = document.querySelector(".minus");
@@ -55,24 +56,12 @@ backspaceButton.addEventListener("click", () => {
   if (displayValue.textContent.length === 0) displayValue.textContent = 0;
 });
 
-//if operator button is pressed, next number keypress will replace the dislayValue
-plusButton.addEventListener("click", () => {
-  state.operatorIsActive = true;
-  if(state.currentOperator !== "") {
-    calculate();
-  };
-
-  state.currentOperator = "+";
-  // displayVal
-});
-
 function calculate() {
   state.secondValue = displayValue.textContent;
   console.log(state.currentOperator);
   console.log(state.firstValue);
   console.log(state.secondValue);
   displayValue.textContent = operate(state.currentOperator, Number(state.firstValue), Number(state.secondValue));
-  
 };
 
 equalsButton.addEventListener("click", () => {
@@ -86,6 +75,27 @@ clearButton.addEventListener("click", () => {
   state.firstValue = "";
   state.secondValue = "";
 });
+
+for (let i = -0; i < operators.length; i ++)
+  operators[i].addEventListener("click", function(operatorButton) {
+    state.operatorIsActive = true;
+    if(state.currentOperator !== "" && state.operatorIsActive === true) {
+      calculate();
+    };
+    operatorButton = this.textContent;
+    switch (operatorButton) {
+      case "–":
+        operatorButton = "-";
+        break;
+      case "×":
+        operatorButton = "*";
+        break;
+      case "÷":
+        operatorButton = "/";
+        break;
+    };
+    state.currentOperator = operatorButton;
+  });
 
 for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener("click", function(input) {
