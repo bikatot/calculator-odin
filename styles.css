@@ -34,7 +34,7 @@ body {
   justify-content: flex-end;
   font-size: 60px;
   background-color: #7b7678;
-  padding: 0px 20px;
+  padding: 0px 15px;
   font-family: 'Audiowide', cursive;
   color: #291f1f;
 }
@@ -60,6 +60,11 @@ button {
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 0, 0.2);
   padding: 0px;
   cursor: pointer;
+}
+
+button:active {
+  box-shadow: 0 6px rgb(109, 108, 108);
+  transform: translateY(4px)
 }
 
 .backspace,

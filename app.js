@@ -15,8 +15,6 @@ function divide(a, b) {
 };
 
 function operate(operator, firstNumber, secondNumber) {
-  // state.firstValue = state.secondValue;
-  // state.secondValue = "";
   switch (operator) {
     case "+":
       return(`${add(firstNumber, secondNumber)}`);
@@ -25,6 +23,7 @@ function operate(operator, firstNumber, secondNumber) {
     case "*":
       return(`${multiply(firstNumber, secondNumber)}`);  
     case "/":
+      console.log(secondNumber);
       if (secondNumber === 0) {
         return "Nope";
       } else {
@@ -62,6 +61,10 @@ function calculate() {
   console.log(state.firstValue);
   console.log(state.secondValue);
   displayValue.textContent = operate(state.currentOperator, Number(state.firstValue), Number(state.secondValue));
+  if (displayValue.textContent !== "ERROR" && displayValue.textContent !== "Nope") {
+    displayValue.textContent = +parseFloat(displayValue.textContent).toFixed(3);
+  };
+  displayValue.textContent = displayValue.textContent.substring(0, 9);
 };
 
 equalsButton.addEventListener("click", () => {
@@ -76,7 +79,7 @@ clearButton.addEventListener("click", () => {
   state.secondValue = "";
 });
 
-for (let i = -0; i < operators.length; i ++)
+for (let i = 0; i < operators.length; i ++)
   operators[i].addEventListener("click", function(operatorButton) {
     state.operatorIsActive = true;
     if(state.currentOperator !== "" && state.operatorIsActive === true) {
@@ -107,14 +110,19 @@ for (let i = 0; i < numbers.length; i++) {
       state.operatorIsActive = false;
     };
     input = this.textContent;
+    displayValue.textContent = displayValue.textContent.substring(0, 9);   
     if (input === "⋅") {
       if (displayValue.textContent === "") {
         displayValue.append("0" + ".");
+      } else if (displayValue.textContent.includes(".")) {
+        //Dot already present, no action needed.
       } else {
         displayValue.append(".");
+        displayValue.textContent = displayValue.textContent.substring(0, 9);   
       };
     } else {
       displayValue.append(input);
+      displayValue.textContent = displayValue.textContent.substring(0, 9);   
     };
-  });    
+  });     
 };
