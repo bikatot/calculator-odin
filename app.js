@@ -24,7 +24,7 @@ function operate(operator, firstNumber, secondNumber) {
       return(`${multiply(firstNumber, secondNumber)}`);  
     case "/":
       console.log(secondNumber);
-      if (secondNumber === 0) {
+      if (secondNumber == 0) {
         return "Nope";
       } else {
       return (`${divide(firstNumber, secondNumber)}`)};  
@@ -50,9 +50,13 @@ let state = {
   secondValue: "",
 }
 
-backspaceButton.addEventListener("click", () => {
+let backspace = function() {
   displayValue.textContent = displayValue.textContent.slice(0, -1);
   if (displayValue.textContent.length === 0) displayValue.textContent = 0;
+};
+
+backspaceButton.addEventListener("click", () => {
+  backspace()
 });
 
 function calculate() {
@@ -98,18 +102,33 @@ for (let i = 0; i < operators.length; i ++)
         break;
     };
     state.currentOperator = operatorButton;
+    //
+    // if (state.currentOperator !== "" && state.operatorIsActive === true) {
+    //   this.style.backgroundColor = "white"
+    // };
   });
+  
+document.body.addEventListener('keydown', (e) => {
+  console.log(e.key);
+  if (e.key == "Backspace") backspace();
+  let numbersArray = Array.from(numbers);
+  numbersArray.forEach(number => {
+    // if (number.textContent === "⋅") number.textContent = ".";
+    if (number.textContent.includes(e.key)) {
+      numberEntered(number.click())
+    }
+  });
+})
 
-for (let i = 0; i < numbers.length; i++) {
-  numbers[i].addEventListener("click", function(input) {
+let numberEntered = function (input) {
+  input = (this.textContent);
+  if (input != undefined) {
     if (displayValue.textContent === "0") displayValue.textContent = "";
-    console.log(state.operatorIsActive);
     if (state.operatorIsActive === true) {
       state.firstValue = displayValue.textContent;
       displayValue.textContent = "";
       state.operatorIsActive = false;
     };
-    input = this.textContent;
     displayValue.textContent = displayValue.textContent.substring(0, 9);   
     if (input === "⋅") {
       if (displayValue.textContent === "") {
@@ -124,5 +143,9 @@ for (let i = 0; i < numbers.length; i++) {
       displayValue.append(input);
       displayValue.textContent = displayValue.textContent.substring(0, 9);   
     };
-  });     
+  };
+};
+
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i].addEventListener("click",  numberEntered);     
 };
