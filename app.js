@@ -32,6 +32,7 @@ function operate(operator, firstNumber, secondNumber) {
   };
 };
 
+let allButtons = document.querySelectorAll("button");
 let numbers = document.querySelectorAll(".number");
 let operators = document.querySelectorAll(".operator")
 let displayValue = document.querySelector(".display");
@@ -49,7 +50,7 @@ let state = {
   currentOperator: "",
   firstValue: "",
   secondValue: "",
-}
+};
 
 let backspace = function() {
   displayValue.textContent = displayValue.textContent.slice(0, -1);
@@ -61,10 +62,9 @@ backspaceButton.addEventListener("click", backspace)
 let equals = function() {
   calculate();
   state.currentOperator = "";
-}
+};
 
 equalsButton.addEventListener("click", calculate);
-
 
 let clear = function () {
   displayValue.textContent = 0;
@@ -89,29 +89,27 @@ function calculate() {
 };
 
 let operatorPressed = function() {
-  {
-    state.operatorIsActive = true;
-    if(state.currentOperator !== "" && state.operatorIsActive === true) {
-      calculate();
-    };
-    operatorButton = this.textContent;
-    switch (operatorButton) {
-      case "–":
-        operatorButton = "-";
-        break;
-      case "×":
-        operatorButton = "*";
-        break;
-      case "÷":
-        operatorButton = "/";
-        break;
-    };
-    state.currentOperator = operatorButton;
-    //
-    // if (state.currentOperator !== "" && state.operatorIsActive === true) {
-    //   this.style.backgroundColor = "white"
-    // };
+  state.operatorIsActive = true;
+  if(state.currentOperator !== "" && state.operatorIsActive === true) {
+    calculate();
   };
+  operatorButton = this.textContent;
+  switch (operatorButton) {
+    case "–":
+      operatorButton = "-";
+      break;
+    case "×":
+      operatorButton = "*";
+      break;
+    case "÷":
+      operatorButton = "/";
+      break;
+  };
+  state.currentOperator = operatorButton;
+  //
+  // if (state.currentOperator !== "" && state.operatorIsActive === true) {
+  //   this.style.backgroundColor = "white"
+  // };
 };
 
 for (let i = 0; i < operators.length; i ++) {
@@ -128,13 +126,31 @@ document.body.addEventListener('keydown', (e) => {
   if (e.key == "*") multiplyButton.click();
   if (e.key == "/") divideButton.click();
   if (e.key == ".") dotButton.click();
-  let numbersArray = Array.from(numbers);
-  numbersArray.forEach(number => {
+  numbers.forEach(number => {
     if (number.textContent.includes(e.key)) {
-      numberEntered(number.click())
-    }
+      numberEntered(number.click());
+    };
   });
-})
+});
+
+document.body.addEventListener('keydown', (e) => {
+  allButtons.forEach(button => {
+    if (e.key == "*") multiplyButton.classList.add("button-active"); 
+    if (e.key == "/") divideButton.classList.add("button-active");
+    if (e.key == "-") minusButton.classList.add("button-active");
+    if (e.key == ".") dotButton.classList.add("button-active");
+    if (e.key == "Backspace") backspaceButton.classList.add("button-active");
+    if (button.textContent.includes(e.key) ) {
+      button.classList.add("button-active");
+    } ;
+  });
+});
+
+document.body.addEventListener("keyup", () => {
+  allButtons.forEach(button => {
+    button.classList.remove("button-active");
+  });
+});
 
 let numberEntered = function (input) {
   input = (this.textContent);

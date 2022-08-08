@@ -62,9 +62,10 @@ button {
   cursor: pointer;
 }
 
-button:active {
+button:active,
+.button-active {
   box-shadow: 0 6px rgb(109, 108, 108);
-  transform: translateY(4px)
+  transform: translateY(4px);
 }
 
 .backspace,
