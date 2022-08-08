@@ -25,7 +25,7 @@ function operate(operator, firstNumber, secondNumber) {
     case "/":
       console.log(secondNumber);
       if (secondNumber == 0) {
-        return "Nope";
+        return "🤔";
       } else {
       return (`${divide(firstNumber, secondNumber)}`)};  
     default: return("ERROR");
@@ -42,6 +42,7 @@ let multiplyButton = document.querySelector(".multiply");
 let divideButton = document.querySelector(".divide");
 let equalsButton = document.querySelector(".equals");
 let backspaceButton = document.querySelector(".backspace");
+let dotButton = document.querySelector(".dot");
 
 let state = {
   operatorIsActive: false,
@@ -55,9 +56,24 @@ let backspace = function() {
   if (displayValue.textContent.length === 0) displayValue.textContent = 0;
 };
 
-backspaceButton.addEventListener("click", () => {
-  backspace()
-});
+backspaceButton.addEventListener("click", backspace)
+
+let equals = function() {
+  calculate();
+  state.currentOperator = "";
+}
+
+equalsButton.addEventListener("click", calculate);
+
+
+let clear = function () {
+  displayValue.textContent = 0;
+  state.currentOperator = "";
+  state.firstValue = "";
+  state.secondValue = "";
+};
+
+clearButton.addEventListener("click", clear);
 
 function calculate() {
   state.secondValue = displayValue.textContent;
@@ -65,26 +81,15 @@ function calculate() {
   console.log(state.firstValue);
   console.log(state.secondValue);
   displayValue.textContent = operate(state.currentOperator, Number(state.firstValue), Number(state.secondValue));
-  if (displayValue.textContent !== "ERROR" && displayValue.textContent !== "Nope") {
+  if (displayValue.textContent !== "ERROR" && displayValue.textContent !== "🤔") {
     displayValue.textContent = +parseFloat(displayValue.textContent).toFixed(3);
   };
   displayValue.textContent = displayValue.textContent.substring(0, 9);
+  state.currentOperator = ""
 };
 
-equalsButton.addEventListener("click", () => {
-  calculate();
-  state.currentOperator = "";
-});
-
-clearButton.addEventListener("click", () => {
-  displayValue.textContent = 0;
-  state.currentOperator = "";
-  state.firstValue = "";
-  state.secondValue = "";
-});
-
-for (let i = 0; i < operators.length; i ++)
-  operators[i].addEventListener("click", function(operatorButton) {
+let operatorPressed = function() {
+  {
     state.operatorIsActive = true;
     if(state.currentOperator !== "" && state.operatorIsActive === true) {
       calculate();
@@ -106,14 +111,25 @@ for (let i = 0; i < operators.length; i ++)
     // if (state.currentOperator !== "" && state.operatorIsActive === true) {
     //   this.style.backgroundColor = "white"
     // };
-  });
-  
+  };
+};
+
+for (let i = 0; i < operators.length; i ++) {
+  operators[i].addEventListener("click", operatorPressed);
+};
+
 document.body.addEventListener('keydown', (e) => {
   console.log(e.key);
+  if (e.key == "Escape") clear();
+  if (e.key == "=" || e.key == "Enter") equals();
   if (e.key == "Backspace") backspace();
+  if (e.key == "+") plusButton.click();
+  if (e.key == "-") minusButton.click();
+  if (e.key == "*") multiplyButton.click();
+  if (e.key == "/") divideButton.click();
+  if (e.key == ".") dotButton.click();
   let numbersArray = Array.from(numbers);
   numbersArray.forEach(number => {
-    // if (number.textContent === "⋅") number.textContent = ".";
     if (number.textContent.includes(e.key)) {
       numberEntered(number.click())
     }
