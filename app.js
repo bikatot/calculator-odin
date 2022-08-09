@@ -23,7 +23,6 @@ function operate(operator, firstNumber, secondNumber) {
     case "*":
       return(`${multiply(firstNumber, secondNumber)}`);  
     case "/":
-      console.log(secondNumber);
       if (secondNumber == 0) {
         return "🤔";
       } else {
@@ -71,15 +70,14 @@ let clear = function () {
   state.currentOperator = "";
   state.firstValue = "";
   state.secondValue = "";
+  state.operatorIsActive = false;
+  changeOperatorColor();
 };
 
 clearButton.addEventListener("click", clear);
 
 function calculate() {
   state.secondValue = displayValue.textContent;
-  console.log(state.currentOperator);
-  console.log(state.firstValue);
-  console.log(state.secondValue);
   displayValue.textContent = operate(state.currentOperator, Number(state.firstValue), Number(state.secondValue));
   if (displayValue.textContent !== "ERROR" && displayValue.textContent !== "🤔") {
     displayValue.textContent = +parseFloat(displayValue.textContent).toFixed(3);
@@ -114,7 +112,6 @@ for (let i = 0; i < operators.length; i ++) {
 };
 
 document.body.addEventListener('keydown', (e) => {
-  console.log(e.key);
   if (e.key == "Escape") clear();
   if (e.key == "=" || e.key == "Enter") equals();
   if (e.key == "Backspace") backspace();
@@ -131,7 +128,6 @@ document.body.addEventListener('keydown', (e) => {
 });
 
 let changeOperatorColor =  function (operator) {
-  console.log(operator);
   if (state.operatorIsActive === true) {
     operator.classList.add("active-operator");
   } else if (state.operatorIsActive === false) {
