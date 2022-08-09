@@ -83,3 +83,7 @@ button:active,
 .number {
   color: #cfd4d1;
 }
+
+.active-operator {
+  border-color: greenyellow;
+}

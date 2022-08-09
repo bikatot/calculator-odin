@@ -94,6 +94,7 @@ let operatorPressed = function() {
     calculate();
   };
   operatorButton = this.textContent;
+  changeOperatorColor(this);
   switch (operatorButton) {
     case "–":
       operatorButton = "-";
@@ -106,10 +107,6 @@ let operatorPressed = function() {
       break;
   };
   state.currentOperator = operatorButton;
-  //
-  // if (state.currentOperator !== "" && state.operatorIsActive === true) {
-  //   this.style.backgroundColor = "white"
-  // };
 };
 
 for (let i = 0; i < operators.length; i ++) {
@@ -132,6 +129,17 @@ document.body.addEventListener('keydown', (e) => {
     };
   });
 });
+
+let changeOperatorColor =  function (operator) {
+  console.log(operator);
+  if (state.operatorIsActive === true) {
+    operator.classList.add("active-operator");
+  } else if (state.operatorIsActive === false) {
+    operators.forEach(operator => {
+      operator.classList.remove("active-operator");
+    });
+  };
+};
 
 document.body.addEventListener('keydown', (e) => {
   allButtons.forEach(button => {
@@ -160,6 +168,7 @@ let numberEntered = function (input) {
       state.firstValue = displayValue.textContent;
       displayValue.textContent = "";
       state.operatorIsActive = false;
+      changeOperatorColor(this);
     };
     displayValue.textContent = displayValue.textContent.substring(0, 9);   
     if (input === "⋅") {
